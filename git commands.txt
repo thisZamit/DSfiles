@@ -13,5 +13,17 @@ git pull 'link'
 
 git add .
 git commit -m "message"
+git push origin main
 
+rm -rf .git/ #to delete local git repo
 git clone 'link'
+
+#to generate ssh id
+$ ssh-keygen -t ed25519 -C "thiszamit@gmail.com"
+#dont give password
+
+tail ~/.ssh/id_rsa.pub
+#run this to get the public key stored in c drive (id_rsa can change) copy full ouput and save in ssh key.
+
+git pull origin main --allow-unrelated-histories # to pull when there is history conflict i got when create repo pushed and deleted local repo and tried to push again.
+
