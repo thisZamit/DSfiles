@@ -1,0 +1,17 @@
+git status
+git init
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+git remote add origin <REMOTE_URL>
+# Sets the new remote
+git remote -v
+# Verifies the new remote URL
+git pull 'link'
+#to update local with remote repository
+
+
+git add .
+git commit -m "message"
+
+git clone 'link'
