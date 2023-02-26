@@ -1,3 +1,14 @@
+
+python -m venv venv_name # creates virtual env venv_name in current folder
+venv\Scripts\activate.bat  # to get into venv in cmd
+source venv/Scripts/activate  # to get to it using bash
+pip list # to list all packages installed
+pip freeze > requirements.txt # to get current versions of packages installed into req.txt
+deactivate # go get out
+
+
+
+---------------
 git status
 git init
   git config --global user.email "you@example.com"
