@@ -1,10 +1,27 @@
-
-python -m venv venv_name # creates virtual env venv_name in current folder
-venv\Scripts\activate.bat  # to get into venv in cmd
-source venv/Scripts/activate  # to get to it using bash
+python --version 
+where python   			# to see env paths active for python
+python -m venv venv_name 	# creates virtual env venv_name in current folder
+venv\Scripts\activate.bat  	# to get into venv in cmd
+source venv/Scripts/activate  	# to get to it using bash
 pip list # to list all packages installed
-pip freeze > requirements.txt # to get current versions of packages installed into req.txt
+pip freeze > requirements.txt 	# to get current versions of packages installed into req.txt
+pip install -r requirements.txt  # to install all
 deactivate # go get out
+
+conda create --name conda_env numpy pandas	# creates conda env with name conda_env inside env folder of ananconda in C with numpy and pandas we can also specify python version.
+activate conda_env 				# to activate the environment
+pip list --format=freeze > requirement.txt	# to get requirement file for conda environment, usually conda envs are save in env.yaml files
+conda env export > E:\Anacond\environment.yaml	# to save .yaml file (equivalent to requirment in pip) other disk than C
+type E:\Anacond\environment.yaml		# to view file in cmd
+conda env create -f environment.yaml		# to create new env with same packages
+conda env list					# to get list of all virtual envs present, base(defaul conda env with preinstalled conda libs) and other envs created will be shown
+conda deactivate				# to deactivate
+conda env remove -n conda_env			# to delete conda_env
+
+conda env create -p E:\Anacond\conda_env -f E:\Anacond\environment.yaml  
+						# -p stands for path -n stands for name -f stands for file, use this when environ.yaml diff dir, and vir env also
+						#	has to be created in different env
+conda remove -p E:\Anacond\conda_env --all 	# to completely delete environment including folders created.
 
 
 
