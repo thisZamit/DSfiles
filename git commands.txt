@@ -49,6 +49,47 @@ hello amit
 you entered hubli
 you entered 23
 you are DEEL
+---------------------
+after installing windows subsystem for linux
+to use linux commands in conda prompt or cmd, we can use wsl before entering actual commands to make them work
+>wsl ls  	# this inside conda or cmd will list all files
+>wsl vim fil.txt# opens file in vim editor
+>bash		# this command opens bash/ubuntu/linux file system inside cmd/conda, here we can directly use linux commands.
+>~/.bashrc	# ~ specifies last home directory
+>exit		# to exit bash/linux console
+
+--
+>cd %CONDA_PREFIX%		#this takes us to the root file of current environment
+
+file.bat in windows is equivalent to file.sh in linux
+>mv env_vars.sh env_vars.bat    # mv is used for renaming or replacing
+
+# In windows to create environment variables that activate only when environment is activate and destroyed when env is deactivated
+>cd %CONDA_PREFIX%
+mkdir .\etc\conda\activate.d
+mkdir .\etc\conda\deactivate.d
+type NUL > .\etc\conda\activate.d\env_vars.bat
+type NUL > .\etc\conda\deactivate.d\env_vars.bat
+
+# inside activate.d's .bat file, double click to paste inside vim
+set MY_KEY='secret-key-value'
+set MY_FILE=C:\path\to\my\file
+# to unset these environment variable use below in .bat file of deactivate.d folder
+set MY_KEY=
+set MY_FILE=
+--
+
+# to set env variables in linux use export to set and use unset MY_KEY command to delete value
+
+#individually configuring env varibles in windows.
+conda env config vars set my_var=value 	#to set variables directly
+conda env config vars list		# to see list of env variables in an environment, the ones set in .bat/.sh will not be visible here
+conda env config vars unset my_var -n test-env			# deletes env var values in test-env(vir environment)
+echo %var_name%				# to print variable value in windows, the ones set in .bat/.sh will be visible here
+echo $var_name				# to print var value in linux
+
+
+
 
 
 ---------------
