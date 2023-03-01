@@ -22,7 +22,33 @@ conda env create -p E:\Anacond\conda_env -f E:\Anacond\environment.yaml
 						# -p stands for path -n stands for name -f stands for file, use this when environ.yaml diff dir, and vir env also
 						#	has to be created in different env
 conda remove -p E:\Anacond\conda_env --all 	# to completely delete environment including folders created.
+-------------
+Example bash script test.sh
+$ notepad test.sh	#command to edit script in notepad
+#!/bin/bash		#this can be bash or sh
 
+name='amit'
+place=$1
+date=$2
+user=$(whoami)		#whoami is a command the output of this command will be stored in user variable
+
+echo "hello $name"	
+sleep 1			#sleep for 1 second
+
+echo "you entered $place"
+sleep 1
+
+echo "you entered $date"
+sleep 1
+
+echo "you are $user"
+--------------
+output for above 
+$ bash test.sh hubli 23 	#command can be bash or sh in git bash, this does not run in cmd
+hello amit
+you entered hubli
+you entered 23
+you are DEEL
 
 
 ---------------
