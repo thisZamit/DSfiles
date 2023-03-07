@@ -1,3 +1,4 @@
+> conda . 			# to start vs code in current folder
 python --version 
 where python   			# to see env paths active for python
 python -m venv venv_name 	# creates virtual env venv_name in current folder
@@ -122,3 +123,13 @@ tail ~/.ssh/id_rsa.pub
 
 git pull origin main --allow-unrelated-histories # to pull when there is history conflict i got when create repo pushed and deleted local repo and tried to push again.
 
+>git log -p -2		# last 2 commits and changes made in them
+>git log --name-status origin/main  	# to view last 2 commits(message and file name) in remote repo main branch
+>git log -p -2 origin/main		# to view above along with changes made in file, to help analyse before pulling
+>git diff main origin/main		# to see difference between current state and remote state
+>git branch new_branch			# to create new branch
+>git checkout new_branch		# to use the new_branch created
+>git log --oneline --decorate		# to see the commits and current branch of head
+>git push -u origin new_branch		# to push changes made in branch to remote
+>git checkout main			# to use main
+>git merge new_branch			# to merge changes
