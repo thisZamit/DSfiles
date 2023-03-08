@@ -129,7 +129,30 @@ git pull origin main --allow-unrelated-histories # to pull when there is history
 >git diff main origin/main		# to see difference between current state and remote state
 >git branch new_branch			# to create new branch
 >git checkout new_branch		# to use the new_branch created
+>git checkout -b new_branch		# to create and use new_branch together.
 >git log --oneline --decorate		# to see the commits and current branch of head
 >git push -u origin new_branch		# to push changes made in branch to remote
 >git checkout main			# to use main
 >git merge new_branch			# to merge changes
+>git restore --staged filname		# to unstage a file.
+>git reset --hard commit_id		# to unmerge or change to previous merge.
+>git resest --merge commit_id		#
+>git reset --merge Head~1		# to reset to previous state before merging in current branch
+>git reflog				# to get all previous commits with mesages
+>git stash				# to keep unstaged modified changes in the background( in order to merge etc)
+>git stash pop				# to bring back stashed changes.
+# pull the latest code before creating new branches, or update the branch to latest before making further changes.
+
+>git commit -a -m "commit mesg"		# to commit all previously tracked, but modified files without staging(git add)
+# when there is a conflict, control will enter a merge resolve state where we have to stage and commit 
+# again by modifying file with conflict in current branch( the file will be modified in current branch)
+# merge conflicts happend only when there is difference in a line, if we have an extra commit in main with changes in new
+# cell but want to merge changes of another cell from branch it can be done, end result is: new cell in main retained and 
+# old cell updated with changes..
+# in a merge only new changes/ new lines get added to current branch, if current branch has merged once and made new changes
+# now we cannot merge again and expect old changes: it will say already up to date.
+
+>git branch -v 				# gives list of branches and last commits made in each
+>git branch --merged			# gives a list of merged branches
+>git branch --no-merged			# unmerged branch list
+>git branch -d branch_name		# to delet branch, to force delete use -D instead of -d
