@@ -79,6 +79,16 @@ set MY_FILE=C:\path\to\my\file
 set MY_KEY=
 set MY_FILE=
 --
+# in cmd just 'set' command will list all env variables
+# in linux/bash shell same is done by 'env'
+# echo '$' is used to get env variable value in linux, echo '%--%' is used in cmd.
+# these env variable set using export and set are temporary and las only till terminal is open.
+
+# to set env variable in python venv, set it in venv\Scripts\activate.bat if using cmd or if 
+# using bash set it in venv/Scripts/activate
+
+import os 
+os.environ['ENV_VARIABLE_NAME']
 
 # to set env variables in linux use export to set and use unset MY_KEY command to delete value
 
