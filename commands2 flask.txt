@@ -19,3 +19,31 @@ set FLASK_DEBUG=1			# this is used to immediately reflect changes in website as 
 @app.route("/")
 def hello():
 	return "<h1> Welcome </h1>"
+
+#We can write the whole html code in return but it would be cumbersome so we use render_template
+from flask import Flask,render_template
+app = Flask(__name__)
+
+@app.route('/')
+@app.route('/check')
+def hello():
+    return "hello"
+
+@app.route('/about')
+def about():
+    return render_template('home.html')  # home.html file should be inside 'templates' folder
+
+>home.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>"welcome to page from render template</title>
+</head>
+<body>
+    <head>"hello from html"</head>
+</body>
+</html>
+
+----
+in html code is written using {%  code %}, to use variable values in text like head/p use {{variable}}
+
