@@ -14,3 +14,8 @@ set FLASK_DEBUG=1			# this is used to immediately reflect changes in website as 
 # to set env variable in python venv, set it in venv\Scripts\activate.bat if using cmd or if 
 # using bash set it in venv/Scripts/activate
 # set these environment variables and type command 'flask run'
+
+#we can also give two routes to a single function like
+@app.route("/")
+def hello():
+	return "<h1> Welcome </h1>"
