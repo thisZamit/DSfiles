@@ -151,6 +151,7 @@ git pull origin main --allow-unrelated-histories # to pull when there is history
 >git reflog				# to get all previous commits with mesages
 >git stash				# to keep unstaged modified changes in the background( in order to merge etc)
 >git stash pop				# to bring back stashed changes.
+>git rm -r --cached filename		# to untrack file modifications, just rm to delete file from disk, '-r' for folders
 # pull the latest code before creating new branches, or update the branch to latest before making further changes.
 
 >git commit -a -m "commit mesg"		# to commit all previously tracked, but modified files without staging(git add)

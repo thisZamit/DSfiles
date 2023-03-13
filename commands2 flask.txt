@@ -33,6 +33,10 @@ def hello():
 def about():
     return render_template('home.html')  # home.html file should be inside 'templates' folder
 
+if __name__=='__main__':
+    app.run(debug=True)
+
+------------------------
 >home.html
 <!DOCTYPE html>
 <html>
@@ -46,4 +50,5 @@ def about():
 
 ----
 in html code is written using {%  code %}, to use variable values in text like head/p use {{variable}}
+---------------------
 
