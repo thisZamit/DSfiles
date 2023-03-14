@@ -51,6 +51,8 @@ if __name__=='__main__':
 ----
 in html code is written using {%  code %}, to use variable values in text like head/p use {{variable}}
 ---------------------
+
+
 # using new packages redirect and url_for
 from flask import Flask,render_template,redirect,url_for
 
@@ -75,3 +77,109 @@ def fail(score):
     return f"According to score you entered:{score} you have failed"
 
 --------------------------------------
+
+
+
+
+# to work with a form: python code
+from flask import Flask,render_template,redirect,url_for,request
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+@app.route('/submit/<int:marks>')       # this will allow you to enter a number in this url and get output accordingly
+def submit(marks):
+    if marks>50:
+        return redirect(url_for('success',score=marks)) # redirect to pass page, observe that function name is passed not url(pass)
+    else:
+        return redirect(url_for('fail',score=marks))    # this will redirect to fail page
+    
+
+@app.route('/pass/<int:score>')
+def success(score):
+    return f"According to your score:{score} you have passed"
+
+@app.route('/fail/<int:score>')
+def fail(score):
+    return f"According to your score:{score} you have failed"
+
+@app.route('/check',methods=['POST','GET'])
+def check():
+    if request.method=='POST':
+        maths = float(request.form['maths'])        # maths is given inside 'name' tag in html file 
+        science = float(request.form['science'])
+        total_score = maths+science
+    
+    return redirect(url_for('submit',marks=total_score))
+
+
+if __name__=='__main__':
+    app.run(debug=True)
+----------
+#index.html for above code
+
+<html>
+    <h1>Welcome</h1>
+    <h2> Please enter your marks to know your result</h2>
+    <form action='/check' method="post">
+        <label for="maths">Maths:</label>
+        <input type="text" id="maths" name='maths' value="0"</input>
+        <label for="science">Science:</label>
+        <input type="text" id="science" name="science" value="0"></input><br>  # <br> is used to get to new line
+        <input type="submit" id="submit"></input>
+    </form>
+</html>
+
+-------------------------------------------------------------------------
+#Using jinja framework tools to write code in html
+
+from flask import Flask,render_template,redirect,url_for,request
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+@app.route('/submit/<int:marks>')       # this will allow you to enter a number in this url and get output accordingly
+def submit(marks):
+    return render_template('output.html',variable=marks)
+
+
+@app.route('/checkfor')
+def checkfor():
+    diction={'name':'Amit','Age':26}
+    return render_template('checkfor.html',variable=diction)
+
+
+@app.route('/check',methods=['POST','GET'])
+def check():
+    if request.method=='POST':
+        maths = float(request.form['maths'])        # maths is given inside 'name' tag in html file 
+        science = float(request.form['science'])
+        total_score = maths+science
+    
+    return redirect(url_for('submit',marks=total_score))
+
+    
+
+if __name__=='__main__':
+    app.run(debug=True)
+-----------<checkfor.html>-------------
+<html>
+    <h1>Welcome! this is to demonstrate for loops</h1>
+    {% for key,value in variable.items() %}
+    <table border=2>
+    <tr>
+        <th>{{ key }}</th>
+        <th>{{ value }}</th>
+    </tr>
+    {% endfor %}
+    </table>
+</html>
+---------------------------------------------------------

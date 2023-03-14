@@ -1,0 +1,9 @@
+<html>
+    <h1>This is the result for your score</h1>
+    {% if variable>50 %}
+    <h2>Congratulations! you have passed with score {{variable}}</h2> {# double brackets bring the value passed in render template #}
+    {% else %}
+    <h2>Sorry you have failed with score {{variable}}</h2>
+    {% endif %}
+    {# everything written inside bracket and a hash are comments #}
+</html>
