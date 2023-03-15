@@ -23,7 +23,8 @@ def check():
     if request.method=='POST':
         maths = float(request.form['maths'])        # maths is given inside 'name' tag in html file 
         science = float(request.form['science'])
-        total_score = maths+science
+        language = float(request.form['language'])
+        total_score = maths+science+language
     
     return redirect(url_for('submit',marks=total_score))
 

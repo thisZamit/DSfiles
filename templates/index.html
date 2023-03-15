@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="styles.css">
-        <script src="myscript.js"></script>
+        <link rel="stylesheet" href={{ url_for('static',filename='styles.css') }}>
+        <script type=text/javascript src={{ url_for('static',filename='myscript.js') }}></script>
 
     </head>
     <h1>Welcome</h1>
@@ -18,7 +18,7 @@
             <label for="language">Language: </label>
             <span id="slider_value2" style="color:rgb(7, 7, 7);font-weight:bold;"></span><br>
             <input type="button" value="-" onClick="subtract_one()">
-            0<input type="range" min="0" max="1000" step="1" id="myrange" name="language" value=477" onchange="show_value2(this.value)">100
+            0<input type="range" min="0" max="100" step="1" id="myrange" name="language" value=50" onchange="show_value2(this.value)">100
         <input type="button" value="+" onClick="add_one()">
         </div><br><br>
         
