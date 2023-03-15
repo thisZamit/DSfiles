@@ -182,4 +182,67 @@ if __name__=='__main__':
     {% endfor %}
     </table>
 </html>
----------------------------------------------------------
+--------------<output.html>-------------------------------------------
+<html>
+    <h1>This is the result for your score</h1>
+    {% if variable>50 %}
+    <h2>Congratulations! you have passed with score {{variable}}</h2> {# double brackets bring the value passed in render template #}
+    {% else %}
+    <h2>Sorry you have failed with score {{variable}}</h2>
+    {% endif %}
+    {# everything written inside bracket and a hash are comments #}
+</html>
+-------------------------------------------------
+
+
+
+# 	Basic website with slider using html,css and js integration without flask/jinja #
+-----------------<index.html>---------------------------
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <script src="myscript.js"></script>
+
+    </head>
+    <h1>Welcome</h1>
+    <h2> Please enter your marks to know your result</h2>
+    
+    <form action='/check' method="post">
+        <label for="maths">Maths:</label>
+        <input type="text" id="maths" name='maths' value="0"></input>
+        <label for="science">Science:</label>
+        <input type="text" id="science" name="science" value="0"></input><br><br>
+
+        <div class="slidecontainer" >
+            <label for="language">Language: </label>
+            <span id="slider_value2" style="color:rgb(7, 7, 7);font-weight:bold;"></span><br>
+            <input type="button" value="-" onClick="subtract_one()">
+            0<input type="range" min="0" max="1000" step="1" id="myrange" name="language" value=477" onchange="show_value2(this.value)">100
+        <input type="button" value="+" onClick="add_one()">
+        </div><br><br>
+        
+        <input type="submit" id="submit"></input>
+    </form>
+</html>
+
+
+
+--------------------------<myscript.js>------------------------------------
+function show_value2(x)
+{
+ document.getElementById("slider_value2").innerHTML=x;
+}
+function add_one()
+{
+    document.getElementById("myrange").value =parseInt(document.getElementById("myrange").value)+1;
+  show_value2(document.getElementById("myrange").value);
+}
+function subtract_one()
+{
+    document.getElementById("myrange").value =parseInt(document.getElementById("myrange").value)-1;
+    show_value2(document.getElementById("myrange").value);
+}
+
+
+-------------------------<style.css>--------------------------------
