@@ -333,3 +333,54 @@ if __name__=='__main__':
 </html>
 
 -----------------------------------------------------------------------------------------------
+# checking get post with postman..
+
+from flask import Flask,render_template,url_for,redirect,Response,request
+import cv2
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# experimentitn with postman
+@app.route('/webcam', methods=['GET','POST'])
+def webcam():
+    if request.method=='POST':                  # in postman ->body ->form-data we can give key as "name" and value
+        name = request.form["name"]
+        return name
+    else:
+        return render_template('index.html')   # this will be seen if user is entering via web
+    
+
+@app.route('/webcam2', methods=['POST'])
+def webcam2():
+    res = request.get_json()                  # in postman -> body -> raw -> from dropdown select json(dictionary with keys and values in double quotes)
+    return res                          # same dictionary returned after clicking send
+
+
+# also see requet.json and jsonify functions
+
+if __name__=='__main__':
+    app.run(debug=True)
+----------------------------->index.html>------------------
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body style ="background-color: white;">
+        <h1>welcome to video stream</h1>
+        <div>
+            <form action="webcam" method="POST">
+                <label for="name">name: </label>
+                <input type="text" id="name" value="default" name="name">
+                <input type="submit">
+            </form>
+            
+            
+        </div>
+    </body>
+</html>
+--------------------------------------------------------------------
