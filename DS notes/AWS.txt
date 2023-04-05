@@ -1,0 +1,60 @@
+
+in flaskpp.py file we have to change the port and host where the app is run
+if __name__=='__main__':
+	app.run(host='0.0.0.0', port='8080')
+
+Login to AWS with root user, email -> thiszamit
+download winscp and putty for windows
+
+
+create an ec2 instance with all free-tier and ubuntu OS, it will ask for key pair create it and download the .pem file.
+
+create one more inmore inbound rule in security group section
+select all traffic instead of ssh, and select anywhere instead of custom.
+
+Once it is running, click on the the instance checkbox and you can see all details related to it..
+
+click on connect -> ssh client -> copy the url under 'connect using public DNS'( should be pasted under winscp host url)
+
+in Winscp it will ask for a user name, enter the name given under ec2-instance connect section
+
+in case if we are using putty we need to use 'ubuntu@' before publicaddress.com, and use .ppk file in ssh->auth->browse
+
+for password click on advanced-> authentication => three dots to select file, select the .pem file -> it will ask whether
+to convert it into ppk select ok and give a destination to save ppk, ->ok -> yes
+
+Now you will see ubuntu server contents along side your files in windows, drag and drop the required files inside ubuntu.
+
+to install things in the Ubuntu server we have to connect to putty, in same Winscp window select the icon with 2computers.
+this will give the command prompt for server, run ls and check all copied files are situated.
+
+
+commands to run inside ubuntu server
+>sudo apt-get update && sudo apt-get upgrade
+>sudo apt install python3
+>python3
+>exit()
+>sudo apt-get update && sudo apt-get install python3-pip
+
+
+>pip3 install -r requirements.txt
+
+>python3 flaskapp.py
+the app will start runnning in public dns url, provider under connect -> ssh client
+copy the url and add :8080 to start seeing the webpage.
+http://ec2-35-175-105-153.compute-1.amazonaws.com:8080/submit/51
+
+as soon as we close the server or press ctrl+c, website doesn't run..
+to keep it running use command
+>screen -R deploy python3 flaskapp.py
+
+after closing the terminal and reopening
+to see current processes running in server
+>ps aux
+and get pid corresponding to 'python3 flask'
+
+>kill 18067
+
+
+
+
