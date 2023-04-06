@@ -1,0 +1,25 @@
+installing docker in ec2 ubuntu
+
+>sudo apt-get update && sudo apt-get upgrade 		#This doesnt install new but updates existing packages.
+
+>curl -fsSL https://test.docker.com -o test-docker.sh	#it uses a file stored in docker.com to install docker
+>sudo sh test-docker.sh
+
+>sudo usermod -aG docker ubuntu				#giving sudo permission to our user(ubuntu) to avoid sudo everytime.
+
+now if we run docker version command it will give permission denied, to see changes right click on top panel and select
+duplicate terminal, now run the command and check that command is working fine.
+
+
+Simple dockerfile
+FROM python:3.11-alpine3.17
+WORKDIR /app
+COPY . /app
+RUN pip install -r requirements.txt
+EXPOSE 3000
+CMD python ./flaskapp.py
+
+----
+uploaded above in ubuntu server
+>docker build -t thiszamit/mlapp1:0.1 .
+ 
