@@ -1,3 +1,11 @@
+installing docker in windows
+we have to upgrade to wsl 2, then install docker desktop
+if you have wsl 1, download the wsl upgrade package https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+then run this command in powershell >wsl --set-default-version 2 (by opening powershell as administrator)
+guide below
+https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+
+
 installing docker in ec2 ubuntu
 
 >sudo apt-get update && sudo apt-get upgrade 		#This doesnt install new but updates existing packages.
