@@ -5,6 +5,8 @@ then run this command in powershell >wsl --set-default-version 2 (by opening pow
 guide below
 https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
 
+To install wsl2 from begining
+https://pureinfotech.com/install-windows-subsystem-linux-2-windows-10/
 
 installing docker in ec2 ubuntu
 
@@ -24,10 +26,87 @@ FROM python:3.11-alpine3.17
 WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt
-EXPOSE 3000
+EXPOSE 3000		#the expose will expose a port from container if not specified in flask.py
 CMD python ./flaskapp.py
 
 ----
 uploaded above in ubuntu server
 >docker build -t thiszamit/mlapp1:0.1 .
- 
+
+>docker run -d -p 8080:8080 thiszamit/mlapp1:0.1       ->8080:8080 mean hostport:container port
+when run on local enter localhost:8080 or 127.0.0.1:8080 to run the app   
+
+>docker run -d -p 3000:8080 thiszamit/mlapp1:0.1       ->3000:8080 mean hostport:container port
+when run on local enter localhost:3000 or 127.0.0.1:3000 to run the app  
+
+>docker login -u "myusername" -p "mypassword" docker.io		docker login -u "thiszamit" -p "Jesus@123" docker.io
+>docker push myusername/myimage:0.0.1
+
+>docker pull thiszamit/mlapp1:0.1
+
+
+
+ENV http_proxy http://proxy-chain.xxx.com:911/
+ENV https_proxy http://proxy-chain.xxx.com:912/
+
+-----
+to change wsl password(amit:amit)
+
+getting error pip install not working
+
+click==8.1.3
+#to synchronise clock of host to container.
+docker run --rm --privileged alpine hwclock -s 
+
+RUN pip install --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org --upgrade --proxy=127.0.0.1:3128 -r requirements.txt
+
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf && pip install pipenv && pipenv install --system
+
+pip install gensim config --global http.sslVerify false
+
+to upgrade pip
+$ pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org pip setuptools
+pip install --upgrade pip	or  python -m pip install --upgrade pip
+
+
+##all the above did not work
+try modifying docker.json file from docker desktop->Docker Engine
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": false
+  },
+  "dns": [
+    "114.114.114.114",
+    "8.8.8.8"
+  ]
+}
+
+found in https://dockerlabs.collabnix.com/intermediate/networking/Configuring_DNS.html
+
+also turned on wsl integration toggled ubuntu
+
+
+FROM python:3.11.2
+WORKDIR /app
+COPY . /app
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+CMD python ./flaskapp.py
+
+this version two pushed from local comp 
+docker push thiszamit/mlapp1:0.2
+
+to delete images, i.e images built but are not running
+docker rmi image_name(or partial id)
+docker rmi -f image_name		#to forcefully remove image
+
+To delete containers( stopped images also fall under this, found by running docker ps -a)
+docker rm cont_name		#to delete container
+docker rm -f cont_name 		#to delete running container
