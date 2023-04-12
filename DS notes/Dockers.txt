@@ -110,3 +110,48 @@ docker rmi -f image_name		#to forcefully remove image
 To delete containers( stopped images also fall under this, found by running docker ps -a)
 docker rm cont_name		#to delete container
 docker rm -f cont_name 		#to delete running container
+
+
+-------------------
+docker compose is used to run images together, also used for ci cd, we can also use it to build images from dockerfiles.
+
+the ideal name is docker-compose.yml
+
+to check docker compose working..
+>docker-compose version			# displays the version.
+>docker compose				#gives basic commands in docker and other info
+
+we can use the below code to build an image from the docker file in current directory
+-------------------
+version: "1.1"
+
+services:
+ app:
+  build: .
+  ports: 
+    - "8080:8080"
+-----------------------
+we can also give extra info to build as below
+--------------
+# docker-compose.yml
+version: '2'
+
+services:
+  web:
+    build:
+    # build from Dockerfile
+      context: ./Path
+      dockerfile: Dockerfile
+    ports:
+     - "5000:5000"
+    volumes:
+     - .:/code
+  redis:
+    image: redis
+-------------------
+>docker-compose build			# we can use this if docker compose file is named docker-compose.yml and in current directory
+>docker-compose build -f path		# if not
+
+>docker tage <image> <custom name>	# docker compose gives automatic tag to our built image so we can change it using this.
+>docker tag gitexp-app thiszamit/mlapp1:0.3
+
