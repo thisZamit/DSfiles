@@ -111,7 +111,7 @@ To delete containers( stopped images also fall under this, found by running dock
 docker rm cont_name		#to delete container
 docker rm -f cont_name 		#to delete running container
 
-
+docker exec -it <container>		# To get inside container terminal.
 -------------------
 docker compose is used to run images together, also used for ci cd, we can also use it to build images from dockerfiles.
 
@@ -151,7 +151,114 @@ services:
 -------------------
 >docker-compose build			# we can use this if docker compose file is named docker-compose.yml and in current directory
 >docker-compose build -f path		# if not
-
+>docker-compose up			#to run
+>docker-compose up --build		# 2 in 1
 >docker tage <image> <custom name>	# docker compose gives automatic tag to our built image so we can change it using this.
 >docker tag gitexp-app thiszamit/mlapp1:0.3
+alternately we can use container-name:  in docker compose to specify name of container.
+--------------------------------
+Entrypoint
+-----------------------
+FROM centos:7
+MAINTAINER Devopscube
+RUN yum -y update && \
+    yum -y install httpd-tools && \
+    yum clean all
+CMD ["ab"] ["http://google.com/"]
+
+However, if you run docker run testentrypoint ab http://bing.com/ then the whole CMD command inside the dockerfile will be ignored, and the command arguments passed through the docker run command will be given preference. That is not the case with entrypoint instruction. Whatever you provide through entrypoint actually appends to the existing entrypoint instruction in the dockerfile. Let's look at the example below:
+
+FROM centos:7
+MAINTAINER Devopscube
+RUN yum -y update && \
+    yum -y install httpd-tools && \
+    yum clean all
+ENTRYPOINT ["ab"]
+
+Now you can run docker run testentrypoint http://bing.com/ to achieve the same results because the arguments to docker run will be appended to the instruction present in dockerfile and will not be overridden.
+
+We can combine both entrypoint and cmd in a single dockerfile.
+To conclude: • Use ENTRYPOINT instructions when creating an executable Docker image with commands that must always be executed. 
+• Use CMD instructions for an additional set of arguments that will serve as default instructions in case there is an explicit command line argument provided when the container runs.
+
+------------------------------------------------------------------------------
+ngnix configuration file -> flaskap.conf
+server {
+	listen 80;
+	server_name $SERVER_NAME;
+	
+	location / {
+		proxy_set_header Host $host;
+		proxy_pass http://0.0.0.0:8000;
+		}
+	}
+
+nginx dockerfile
+----------------------
+FROM nginx
+RUN rm /etc/nginx/conf.d/default.conf
+COPY flaskapp.conf /etc/nginx/conf.d/
+
+-----------------------
+
+Docker compose file with nginx
+
+version: '1.1'
+
+services:
+	app:
+		image:thiszamit/mlapp1:1.1
+		ports:
+		 - "8080:8080"
+		network_mode: host
+
+	nginx:
+		build: ./nginx
+		container_name: nginxCont
+		environment: 
+		 - SERVER_NAME=0.0.0.0
+		restart: always
+		network_mode: host
+
+------------------------------------------------
+another version of starting nginx
+
+docker compose file
+version: "3"
+  services:
+   app:
+    build:
+    context: app
+    ports:
+     - "5000"
+   nginx:
+    image: nginx: latest
+    volumes:
+     - ./nginx.conf:/etc/nginx/nginx.conf: ro
+    depends_on:
+     - app
+    ports:
+     - "80:80"
+-----------------------
+ngin.conf file
+-----
+
+events {
+	worker_connections 1000
+	}
+
+http {
+	server{
+	 listen 80;
+	 location / {
+	 	proxy_pass http://app:5000
+-----------
+docker file for above
+FROM python: 3.9-slim
+WORKDIR /app
+COPY..
+RUN pip install -r requirements.txt
+CMD gunicorn --bind 0.0.0.0:5000 wsgi: app
+-------
+		
 

@@ -2,6 +2,16 @@ version: "1.1"
 
 services:
  app:
-  build: .
+  image: thiszamit/mlapp1:0.2
   ports: 
     - "8080:8080"
+  
+
+ nginx:
+  build: ./nginx
+  container_name: nginxCont
+  environment: 
+    - SERVER_NAME=0.0.0.0
+  restart: always
+  network_mode: host
+   
