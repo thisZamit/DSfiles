@@ -110,6 +110,10 @@ git init
   git config --global user.name "Your Name"
 
 git remote add origin <REMOTE_URL>
+
+git remote remove origin(to remove already cloned origin as default origin, in order to set new origin)
+
+git remote -v (to get the repository link that it is currently linked to)
 # Sets the new remote
 git remote -v
 # Verifies the new remote URL
