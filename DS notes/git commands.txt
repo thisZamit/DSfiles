@@ -137,6 +137,7 @@ tail ~/.ssh/id_rsa.pub
 
 git pull origin main --allow-unrelated-histories # to pull when there is history conflict i got when create repo pushed and deleted local repo and tried to push again.
 
+>git init --bare myproject.git		#to properly initialize git repo in local
 >git log -p -2		# last 2 commits and changes made in them
 >git log --name-status origin/main  	# to view last 2 commits(message and file name) in remote repo main branch
 >git log -p -2 origin/main		# to view above along with changes made in file, to help analyse before pulling
