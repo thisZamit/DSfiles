@@ -120,6 +120,12 @@ git remote -v
 git pull 'link'
 #to update local with remote repository
 
+git pull origin master 			#origin in remote, master is the current branch in local, this is set automatically while we  clone a repo
+
+Or you could set it up so that your local master branch tracks github master branch as an upstream:
+git branch --set-upstream-to=origin/master master
+
+git pull
 If you have made commits locally that you regret, you may want your local branch to match the remote branch without saving any of your work. This can be done using git reset. First, make sure you have the most recent copy of that remote tracking branch by fetching.
 
 git fetch <remote> <branch>
