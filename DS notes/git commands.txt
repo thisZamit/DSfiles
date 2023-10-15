@@ -138,6 +138,14 @@ If there have been new commits on both your local branch and the remote branch, 
 You can update your local working branch with commits from the remote, but rewrite history so any local commits occur after all new commits coming from the remote, avoiding a merge commit.
 This is done with git pull --rebase
 
+So, the feature branch gets tacked onto the original branch, creating new commits for each commit in the master branch. Finally, the feature branch is gone, and its commits are renamed 4 and 5, tacked on to the master branch, and become part of the commit number sequence.
+
+A Git rebase is just another way of saying, “Please add my changes to the work that has already been done.”
+With the usual disclaimer that rebase should only be done if the local branch is local only, that is, have not been pushed anywhere as it rewrites history
+--to update branch with changes in remote main
+git checkout dmgr2      # gets you "on branch dmgr2"
+git fetch origin        # gets you up to date with origin
+git merge origin/master
 
 git add .
 git commit -m "message"
@@ -163,6 +171,8 @@ git pull origin main --allow-unrelated-histories # to pull when there is history
 >git branch new_branch			# to create new branch
 >git checkout new_branch		# to use the new_branch created
 >git checkout -b new_branch		# to create and use new_branch together.
+git checkout -b ＜new-branch＞ ＜existing-branch＞
+By default git checkout -b will base the new-branch off the current HEAD. An optional additional branch parameter can be passed to git checkout. In the above example, ＜existing-branch＞ is passed which then bases new-branch off of existing-branch instead of the current HEAD.
 >git log --oneline --decorate		# to see the commits and current branch of head
 >git push -u origin new_branch		# to push changes made in branch to remote
 >git checkout main			# to use main
