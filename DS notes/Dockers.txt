@@ -39,6 +39,9 @@ when run on local enter localhost:8080 or 127.0.0.1:8080 to run the app
 >docker run -d -p 3000:8080 thiszamit/mlapp1:0.1       ->3000:8080 mean hostport:container port
 when run on local enter localhost:3000 or 127.0.0.1:3000 to run the app  
 
+Run the following command to build the Docker image without the cache:
+docker build --no-cache -t <image-name> .
+
 >docker login -u "myusername" -p "mypassword" docker.io		docker login -u "thiszamit" -p "Jesus@123" docker.io
 >docker push myusername/myimage:0.0.1
 
